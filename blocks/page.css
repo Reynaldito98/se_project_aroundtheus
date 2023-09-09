@@ -1,0 +1,14 @@
+.page{
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+  padding-top: 45px;
+  padding-bottom: 60px;
+}
+
+@media screen and (max-width: 660px){
+  .page{
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+}

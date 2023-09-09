@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="First responsive layout ever">
+      <meta name="keywords" content="US, HTML, CSS, Project, Responsive">
+      <meta name="author" content="Reynaldo Perez Pauli">
+      <link rel="stylesheet" href="pages/index.css">
+      <link rel="icon" href="favicon.ico">
+      <title>Around the US</title>
+  </head>
+  <body>
+      <div class="page">
+          <header class="header">
+            <img src="images/logo.svg" alt="Around the US Logo" class="header__logo">
+          </header>
+
+          <main class="content">
+            <section class="profile">
+              <img src="images/jacques-cousteau.jpg" alt="jacques-cousteau" class="profile__image">
+
+              <div class="profile__content">
+                <div class="profile__name-container">
+                  <h1 class="profile__name">Jacques Cousteau</h1>
+                  <button type="button" class="profile__edit-link"><img src="images/edit-icon.svg" alt="edit__logo" class="profile__edit-icon"></button>
+                </div>
+
+                <p class="profile__description">Explorer</p>
+              </div>
+
+              <button class="profile__add-link" type="button"><img src="images/add-icon.svg" alt="add__logo" class="profile__add-icon"></button>
+            </section>
+
+            <section class="elements">
+
+            </section>
+          </main>
+
+         <footer class="footer">
+            <p class="footer__description">&#169; 2022 Around the U.S.</p>
+         </footer>
+      </div>
+
+      <div class="modal modal_display_none">
+        <div class="modal__container">
+          <h2 class="modal__title">New place</h2>
+
+          <form class="modal__form">
+              <input type="text" class="modal__input modal__input_title" placeholder = "Title" id="input_title">
+              <input type="text" class="modal__input modal__input_margin modal__input_url" placeholder = "Image URL" id="input_url">
+              <button type="submit" class="modal__button">Save</button>
+          </form>
+
+          <button class="modal__close-button-container"><img src="./images/add-icon.svg" alt="close-button" class = "modal__close-button"></button>
+        </div>
+      </div>
+
+      <div class="modal modal_display_none">
+        <div class="modal__container">
+          <h2 class="modal__title">Edit profile</h2>
+
+          <form class="modal__form">
+              <input type="text" class="modal__input modal__input_name" placeholder = "Name">
+              <input type="text" class="modal__input modal__input_margin modal__input_about" placeholder = "Description">
+              <button type="submit" class="modal__button">Save</button>
+          </form>
+
+          <button class="modal__close-button-container"><img src="./images/add-icon.svg" alt="close-button" class = "modal__close-button"></button>
+        </div>
+      </div>
+
+      <div class="modal modal_display_none">
+        <figure class="modal__image-container">
+          <img src="./images/lake-louise.jpg" alt="lake-louise" class="modal__image">
+          <figcaption class="modal__caption"></figcaption>
+          <button class="modal__close-button-container"><img src="./images/add-icon.svg" alt="close-button" class = "modal__close-button"></button>
+        </figure>
+      </div>
+
+      <template id="card-template">
+        <article class="card">
+          <img src="" alt="" class="card__image">
+
+          <div class="card__image-description">
+            <h2 class="card__title"></h2>
+            <button type="button" class= "card__link"><img src="images/heart-icon.svg" alt="heart-icon" class="card__love-icon"></button>
+          </div>
+
+          <button class="card__delete-btn"></button>
+        </article>
+      </template>
+
+      <script src="./scripts/index.js">
+
+      </script>
+    </body>
+</html>
