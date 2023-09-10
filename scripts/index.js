@@ -25,22 +25,33 @@ const initialCards = [
       link: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg',
     }
 ];
-
+//  BUTTONS
 const editButton = document.querySelector('.profile__edit-link');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const addPlaceButton = document.querySelector('.profile__add-link');
 
-const modal = document.querySelectorAll('.modal');
-const modalForm = document.querySelectorAll('.modal__form');
-const modalButton = document.querySelectorAll('.modal__button')
-const closeButton = document.querySelectorAll('.modal__close-button-container');
-const modalNameInput = document.querySelector('.modal__input_name');
-const modalDescriptionInput = document.querySelector('.modal__input_about');
+// CARD MODAL
+const cardModal = document.querySelector('#add-card-modal');
+const cardModalForm = cardModal.querySelector('.modal__form');
+const cardModalCloseButton = cardModal.querySelector('.modal__close-button-container');
+const cardModalInputTitle = document.querySelector('#input_title');
+const cardModalInputUrl = document.querySelector('#input_url');
+
+// PROFILE MODAL
+const profileModal = document.querySelector('#profile-modal');
+const profileModalForm = profileModal.querySelector('.modal__form');
+const profileModalCloseButton = profileModal.querySelector('.modal__close-button-container');
+const profileModalNameInput = profileModal.querySelector('.modal__input_name');
+const profileModalDescriptionInput = profileModal.querySelector('.modal__input_about');
+
+// IMAGE MODAL
+const imageModal = document.querySelector('#card-modal');
+const imageModalCloseButton = imageModal.querySelector('.modal__close-button-container');
+
+// CARDS
 const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
 const cardContainer = document.querySelector('.elements');
-const inputTitle = document.querySelector('#input_title');
-const inputUrl = document.querySelector('#input_url');
 //************************************************************************************************************************************** */
 
 // *****************************************   FUNCTION DECLARATIONS   ************************************************************
@@ -64,83 +75,89 @@ function getCardElement(data){
     cardElement.remove();
   }
 
-  function viewingPlaceImage(){
-    const image = modal[2].querySelector('.modal__image');
-    const name = modal[2].querySelector('.modal__caption');
+  function viewPlaceImage(){
+    const image = imageModal.querySelector('.modal__image');
+    const name = imageModal.querySelector('.modal__caption');
 
     image.src = data.link;
     image.alt = data.link;
     name.textContent = data.name;
-    modal[2].classList.remove('modal_display_none');
-    modal[2].classList.remove('modal_transition_delay');
+    openPopUp(imageModal);
   }
 
   likeButton.addEventListener('click', togglingLikeButton);
   deleteBtn.addEventListener('click', removeCard);
-  cardImage.addEventListener('click', viewingPlaceImage);
+  cardImage.addEventListener('click', viewPlaceImage);
 
   return cardElement;
 }
 
 
-function closePopUp(){
-    for(let i=0; i<modal.length; i++){
-      modal[i].classList.add('modal_display_none');
-      modal[i].classList.add('modal_transition_delay');
-    }
+function closePopUp(popUp){
+      popUp.classList.remove('modal_opened');
+      popUp.classList.add('modal_transition_delay');
   }
+
+ function openPopUp(popUp){
+      popUp.classList.add('modal_opened');
+      popUp.classList.remove('modal_transition_delay');
+ } 
 
 
 function makePopUpVisible(){
-  modal[1].classList.remove('modal_display_none');
-  modal[1].classList.remove('modal_transition_delay');
-  modalNameInput.value = profileName.textContent;
-  modalDescriptionInput.value = profileDescription.textContent;
+  openPopUp(profileModal);
+  profileModalNameInput.value = profileName.textContent;
+  profileModalDescriptionInput.value = profileDescription.textContent;
 }
 
 
 function makeAddPlacePopUpVisible(){
-  modal[0].classList.remove('modal_display_none');
-  modal[0].classList.remove('modal_transition_delay');
+  openPopUp(cardModal);
 }
 
-function makePopUpInvisible(){
-  closePopUp();
+function makeCardModalInvisible(){
+  closePopUp(cardModal);
 }
 
+function makeProfileModalInvisible(){
+  closePopUp(profileModal);
+}
 
-
+function makeImageModalInvisible(){
+  closePopUp(imageModal);
+}
 
 function handleProfileFormSubmit(evt){
   evt.preventDefault();
-  profileName.textContent = modalNameInput.value;
-  profileDescription.textContent = modalDescriptionInput.value;
-  closePopUp();
+  profileName.textContent = profileModalNameInput.value;
+  profileDescription.textContent = profileModalDescriptionInput.value;
+  closePopUp(profileModal);
 }
 
-function addingNewCard(evt){
+function addNewCard(evt){
   evt.preventDefault();
-  const titleValue = inputTitle.value;
-  const urlValue = inputUrl.value;
+  const titleValue = cardModalInputTitle.value;
+  const urlValue = cardModalInputUrl.value;
   const cardData = {
     name: titleValue,
     link: urlValue,
   }
   const newCard = getCardElement(cardData);
   cardContainer.prepend(newCard);
-  makePopUpInvisible();
+  closePopUp(cardModal);
+  cardModalInputTitle.value = "";
+  cardModalInputUrl.value = "";
 }
 
 
 // *****************************************   EVENT LISTENERS   ************************************************************
 editButton.addEventListener('click', makePopUpVisible);
 addPlaceButton.addEventListener('click', makeAddPlacePopUpVisible);
-for(let i=0; i<closeButton.length; i++){
-  closeButton[i].addEventListener('click', makePopUpInvisible);
-}
-modalButton[1].addEventListener('click', handleProfileFormSubmit);
-modalButton[0].addEventListener('click', addingNewCard);
-
+profileModalForm.addEventListener('submit', handleProfileFormSubmit);
+cardModalForm.addEventListener('submit', addNewCard);
+cardModalCloseButton.addEventListener('click', makeCardModalInvisible);
+profileModalCloseButton.addEventListener('click', makeProfileModalInvisible);
+imageModalCloseButton.addEventListener('click', makeImageModalInvisible);
 
 
 

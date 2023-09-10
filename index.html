@@ -43,7 +43,7 @@
          </footer>
       </div>
 
-      <div class="modal modal_display_none">
+      <div class="modal modal_display_none" id="add-card-modal">
         <div class="modal__container">
           <h2 class="modal__title">New place</h2>
 
@@ -57,7 +57,7 @@
         </div>
       </div>
 
-      <div class="modal modal_display_none">
+      <div class="modal modal_display_none" id="profile-modal">
         <div class="modal__container">
           <h2 class="modal__title">Edit profile</h2>
 
@@ -71,12 +71,12 @@
         </div>
       </div>
 
-      <div class="modal modal_display_none">
-        <figure class="modal__image-container">
+      <div class="modal modal_display_none" id="card-modal">
+        <div class="modal__image-container">
           <img src="./images/lake-louise.jpg" alt="lake-louise" class="modal__image">
-          <figcaption class="modal__caption"></figcaption>
+          <p class="modal__caption"></p>
           <button class="modal__close-button-container"><img src="./images/add-icon.svg" alt="close-button" class = "modal__close-button"></button>
-        </figure>
+        </div>
       </div>
 
       <template id="card-template">
