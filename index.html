@@ -47,9 +47,11 @@
         <div class="modal__container">
           <h2 class="modal__title">New place</h2>
 
-          <form class="modal__form">
-              <input type="text" class="modal__input modal__input_title" placeholder = "Title" id="input_title">
-              <input type="text" class="modal__input modal__input_margin modal__input_url" placeholder = "Image URL" id="input_url">
+          <form class="modal__form modal__form_start_inactive" novalidate>
+              <input type="text" class="modal__input modal__input_title" placeholder = "Title" id="input_title" required>
+              <span class="form__input-error modal__input-error_input_title"></span>
+              <input type="url" class="modal__input modal__input_margin modal__input_url" placeholder = "Image URL" id="input_url" required>
+              <span class="form__input-error modal__input-error_input_url"></span>
               <button type="submit" class="modal__button">Save</button>
           </form>
 
@@ -61,9 +63,11 @@
         <div class="modal__container">
           <h2 class="modal__title">Edit profile</h2>
 
-          <form class="modal__form">
-              <input type="text" class="modal__input modal__input_name" placeholder = "Name">
-              <input type="text" class="modal__input modal__input_margin modal__input_about" placeholder = "Description">
+          <form class="modal__form" novalidate>
+              <input type="text" class="modal__input modal__input_name" id="name" placeholder="Name" minlength="2" maxlength="40" required>
+              <span class="form__input-error modal__input-error_name"></span>
+              <input type="text" class="modal__input modal__input_margin modal__input_about" id="about" placeholder = "Description" minlength = "2" maxlength = "200" required>
+              <span class="form__input-error modal__input-error_about"></span>
               <button type="submit" class="modal__button">Save</button>
           </form>
 
@@ -93,6 +97,10 @@
       </template>
 
       <script src="./scripts/index.js">
+
+      </script>
+
+      <script src="./scripts/validate.js">
 
       </script>
     </body>
