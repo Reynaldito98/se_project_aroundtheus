@@ -56,6 +56,10 @@
   font-family: 'Inter', sans-serif;
 }
 
+.modal__input_border_red{
+  border-bottom: 1px solid red;
+}
+
 .modal__input:focus{
   outline: none;
 }
@@ -85,7 +89,7 @@
   border-color: #000;
 }
 
-.modal__button:hover{
+.modal__button:hover:not(:disabled){
   opacity: 0.6;
   cursor: pointer;
 }
@@ -128,7 +132,7 @@
   font-family: 'Inter', sans-serif;
 }
 
-.form__input-error{
+.modal__input-error{
   color: red;
   font-size: 12px;
   position: absolute;
