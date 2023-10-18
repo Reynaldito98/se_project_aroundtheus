@@ -7,30 +7,28 @@
       <meta name="description" content="First responsive layout ever">
       <meta name="keywords" content="US, HTML, CSS, Project, Responsive">
       <meta name="author" content="Reynaldo Perez Pauli">
-      <link rel="stylesheet" href="pages/index.css">
-      <link rel="icon" href="favicon.ico">
       <title>Around the US</title>
   </head>
   <body>
       <div class="page">
           <header class="header">
-            <img src="images/logo.svg" alt="Around the US Logo" class="header__logo">
+            <img src="<%=require('./images/logo.svg')%>" alt="Around the US Logo" class="header__logo">
           </header>
 
           <main class="content">
             <section class="profile">
-              <img src="images/jacques-cousteau.jpg" alt="jacques-cousteau" class="profile__image">
+              <img src="<%=require('./images/jacques-cousteau.jpg')%>" alt="jacques-cousteau" class="profile__image">
 
               <div class="profile__content">
                 <div class="profile__name-container">
                   <h1 class="profile__name">Jacques Cousteau</h1>
-                  <button type="button" class="profile__edit-link"><img src="images/edit-icon.svg" alt="edit__logo" class="profile__edit-icon"></button>
+                  <button type="button" class="profile__edit-link"><img src="<%=require('./images/edit-icon.svg')%>" alt="edit__logo" class="profile__edit-icon"></button>
                 </div>
 
                 <p class="profile__description">Explorer</p>
               </div>
 
-              <button class="profile__add-link" type="button"><img src="images/add-icon.svg" alt="add__logo" class="profile__add-icon"></button>
+              <button class="profile__add-link" type="button"><img src="<%=require('./images/add-icon.svg')%>" alt="add__logo" class="profile__add-icon"></button>
             </section>
 
             <section class="elements">
@@ -55,7 +53,7 @@
               <button type="submit" class="modal__button">Save</button>
           </form>
 
-          <button class="modal__close-button-container"><img src="./images/add-icon.svg" alt="close-button" class = "modal__close-button"></button>
+          <button class="modal__close-button-container"><img src="<%=require('./images/add-icon.svg')%>" alt="close-button" class = "modal__close-button"></button>
         </div>
       </div>
 
@@ -71,15 +69,15 @@
               <button type="submit" class="modal__button">Save</button>
           </form>
 
-          <button class="modal__close-button-container"><img src="./images/add-icon.svg" alt="close-button" class = "modal__close-button"></button>
+          <button class="modal__close-button-container"><img src="<%=require('./images/add-icon.svg')%>" alt="close-button" class = "modal__close-button"></button>
         </div>
       </div>
 
       <div class="modal modal_display_none" id="card-modal">
         <div class="modal__image-container">
-          <img src="./images/lake-louise.jpg" alt="lake-louise" class="modal__image">
+          <img src="" alt="" class="modal__image">
           <p class="modal__caption"></p>
-          <button class="modal__close-button-container"><img src="./images/add-icon.svg" alt="close-button" class = "modal__close-button"></button>
+          <button class="modal__close-button-container"><img src="<%=require('./images/add-icon.svg')%>" alt="close-button" class = "modal__close-button"></button>
         </div>
       </div>
 
@@ -89,15 +87,11 @@
 
           <div class="card__image-description">
             <h2 class="card__title"></h2>
-            <button type="button" class= "card__link"><img src="images/heart-icon.svg" alt="heart-icon" class="card__love-icon"></button>
+            <button type="button" class= "card__link"><img src="<%=require('./images/heart-icon.svg')%>" alt="heart-icon" class="card__love-icon"></button>
           </div>
 
           <button class="card__delete-btn"></button>
         </article>
-      </template>
-
-      <script type="module" src="./pages/index.js">
-
-      </script>             
+      </template>            
     </body>
 </html>
