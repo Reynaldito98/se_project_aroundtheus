@@ -5,18 +5,10 @@ export default class Popup{
 
     open(){
         this._popupElement.classList.add('modal_opened');
-        
-        document.addEventListener('keydown', (evt) => {
-            this._handleEscClose(evt);
-        })
     }
 
     close(){
         this._popupElement.classList.remove('modal_opened');
-        
-        document.removeEventListener('keydown', (evt) => {
-            this._handleEscClose(evt);
-        })
     }
 
     _handleEscClose(evt){
@@ -38,6 +30,14 @@ export default class Popup{
 
         this._popupElement.addEventListener("mousedown", (evt) => {
             this._handleRemoteClick(evt);
+        })
+
+        document.addEventListener('keydown', (evt) => {
+            this._handleEscClose(evt);
+
+            document.removeEventListener('keydown', (evt) => {
+                this._handleEscClose(evt);
+            })
         })
     }
 }
