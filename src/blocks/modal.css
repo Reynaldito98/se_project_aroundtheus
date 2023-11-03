@@ -20,8 +20,7 @@
 }
 
 .modal__container{
-  width: 430px;
-  height: 330px;
+  padding: 34px 36px 36px 36px;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
@@ -35,13 +34,11 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 29.05px;
-  margin-top: 34px;
-  margin-left: 36px;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .modal__form{
-  margin: 54px 0 0 36px;
+  margin: 54px 0 0 0;
   width: 358px;
 }
 
@@ -140,8 +137,6 @@
 
 @media screen and (max-width: 660px){
   .modal__container{
-    width: 282px;
-    height: 322px;
     margin-top: 123px;
   }
 
@@ -166,11 +161,7 @@
   }
 
   .modal__input_margin{
-    margin-top: 30px;
-  }
-
-  .modal__button{
-    height: 46px;
+    margin-top: 10px;
   }
 
   .modal__close-button-container{

@@ -6,6 +6,7 @@
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  position: relative;
 }
 
 .profile__image{
@@ -95,6 +96,30 @@
   height: 22px;
 }
 
+.profile__image-button{
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border: none;
+  opacity: 0.8;
+  background-color: #000;
+  background-image: url(../images/Vector.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 20px;
+  z-index: 3;
+  visibility: hidden;
+  transition: visibility 0.4s ease-in 0s;
+}
+
+.profile__image-container:hover .profile__image-button{
+  visibility: visible;
+  cursor: pointer;
+}
+
+
+
 @media screen and (max-width: 660px){
   .profile{
     flex-direction: column;
@@ -145,6 +170,10 @@
     width: 282px;
     padding-top: 8px;
     padding-bottom: 8px;
+  }
+
+  .profile__image-button{
+    left: 101px;
   }
 }
 
