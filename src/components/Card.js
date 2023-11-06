@@ -1,3 +1,6 @@
+  import { createPopupWithYes } from "../utils/utils";
+  import { api } from "../pages/index.js";
+  
   export default class Card{
     constructor(data, cardSelector, handleImageClick){
       this._data = data;
@@ -10,7 +13,13 @@
         this._handleLikeButton();
       });
       this._cardElement.querySelector('.card__delete-btn').addEventListener('click', () => {
-        this._handleDeleteCard();
+        const deleteCardPopup = createPopupWithYes('#delete-card-modal', () => {
+          api.deleteCard(this._data._id);
+          this._handleDeleteCard();
+        });
+
+        deleteCardPopup.open();
+        deleteCardPopup.setEventListeners();
       });
       this._cardElement.querySelector('.card__image').addEventListener('click', () => {
         this._handleImageClick(this._data);
@@ -22,7 +31,13 @@
     }
   
     _handleLikeButton(){
-      this._cardElement.querySelector('.card__love-icon').classList.toggle('card__love-icon_background_black');
+      if(!this._data.isLiked){
+        api.addLike(this._data._id, this._cardElement);
+        this._data.isLiked = true;
+      } else{
+        api.deleteLike(this._data._id, this._cardElement);
+        this._data.isLiked = false;
+      }
     }
   
     returnCardElement(){

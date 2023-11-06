@@ -30,6 +30,7 @@ const editButton = document.querySelector('.profile__edit-link');
 const profileNameClass = '.profile__name';
 const profileDescriptionClass = '.profile__description';
 const addPlaceButton = document.querySelector('.profile__add-link');
+const avatarButton = document.querySelector('.profile__image-button');
 
 // CARD MODAL
 const cardModal = document.querySelector('#add-card-modal');
@@ -38,6 +39,10 @@ const cardModalForm = cardModal.querySelector('.modal__form');
 // PROFILE MODAL
 const profileModal = document.querySelector('#profile-modal');
 const profileModalForm = profileModal.querySelector('.modal__form');
+
+//AVATAR MODAL
+const avatarModal = document.querySelector('#avatar-modal');
+const avatarModalForm = avatarModal.querySelector('.modal__form');
 
 // CARDS
 const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
@@ -53,4 +58,4 @@ const validationConfig = {
   errorClass: "modal__input_border_red"
 };
 
-export {initialCards, editButton, profileNameClass, profileDescriptionClass, addPlaceButton, cardModalForm, profileModalForm, cardTemplate, cardContainerClass, validationConfig};
+export {initialCards, editButton, profileNameClass, profileDescriptionClass, addPlaceButton, cardModalForm, avatarModalForm, profileModalForm, cardTemplate, cardContainerClass, validationConfig, avatarButton};
