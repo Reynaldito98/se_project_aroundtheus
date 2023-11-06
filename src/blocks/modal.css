@@ -20,13 +20,13 @@
 }
 
 .modal__container{
-  padding: 34px 36px 36px 36px;
+  width: 430px;
+  height: 330px;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 430px;
 }
 
 .modal__title{
@@ -35,12 +35,14 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 29.05px;
+  margin-top: 34px;
+  margin-left: 36px;
   margin-bottom: 0;
 }
 
 .modal__form{
-  margin: 54px 0 0 0;
-  width: 100%;
+  margin: 54px 0 0 36px;
+  width: 358px;
 }
 
 .modal__input{
@@ -139,8 +141,8 @@
 @media screen and (max-width: 660px){
   .modal__container{
     width: 282px;
+    height: 322px;
     margin-top: 123px;
-    padding: 25px 22px;
   }
 
   .modal__title{
@@ -149,6 +151,8 @@
     font-size: 18px;
     line-height: 21.78px;
     font-weight: 900;
+    margin-top: 25px;
+    margin-left: 22px;
   }
 
   .modal__form{

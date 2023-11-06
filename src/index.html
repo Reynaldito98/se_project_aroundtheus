@@ -17,19 +17,15 @@
 
           <main class="content">
             <section class="profile">
-
-              <div class = "profile__image-container">
-                <img src="" alt="" class="profile__image">
-                <button class="profile__image-button"></button>
-              </div>
+              <img src="<%=require('./images/jacques-cousteau.jpg')%>" alt="jacques-cousteau" class="profile__image">
 
               <div class="profile__content">
                 <div class="profile__name-container">
-                  <h1 class="profile__name"></h1>
+                  <h1 class="profile__name">Jacques Cousteau</h1>
                   <button type="button" class="profile__edit-link"><img src="<%=require('./images/edit-icon.svg')%>" alt="edit__logo" class="profile__edit-icon"></button>
                 </div>
 
-                <p class="profile__description"></p>
+                <p class="profile__description">Explorer</p>
               </div>
 
               <button class="profile__add-link" type="button"><img src="<%=require('./images/add-icon.svg')%>" alt="add__logo" class="profile__add-icon"></button>
@@ -45,15 +41,15 @@
          </footer>
       </div>
 
-      <div class="modal" id="add-card-modal">
+      <div class="modal modal_display_none" id="add-card-modal">
         <div class="modal__container">
           <h2 class="modal__title">New place</h2>
 
           <form class="modal__form" novalidate>
-              <input type="text" class="modal__input modal__input_name" placeholder = "Title" id="name" minlength = "1" required>
-              <span class="modal__input-error modal__input-error_name"></span>
-              <input type="url" class="modal__input modal__input_margin modal__input_url" placeholder = "Image URL" id="link" required>
-              <span class="modal__input-error modal__input-error_link"></span>
+              <input type="text" class="modal__input modal__input_title" placeholder = "Title" id="title" minlength = "1" required>
+              <span class="modal__input-error modal__input-error_title"></span>
+              <input type="url" class="modal__input modal__input_margin modal__input_url" placeholder = "Image URL" id="url" required>
+              <span class="modal__input-error modal__input-error_url"></span>
               <button type="submit" class="modal__button">Save</button>
           </form>
 
@@ -61,30 +57,7 @@
         </div>
       </div>
 
-      <div class="modal" id="avatar-modal">
-        <div class="modal__container">
-          <h2 class="modal__title">Change profile picture</h2>
-
-          <form class="modal__form" novalidate>
-              <input type="url" class="modal__input modal__input_margin modal__input_avatar" placeholder = "Image URL" id="avatar" required>
-              <span class="modal__input-error modal__input-error_avatar"></span>
-              <button type="submit" class="modal__button">Save</button>
-          </form>
-
-          <button class="modal__close-button-container"><img src="<%=require('./images/add-icon.svg')%>" alt="close-button" class = "modal__close-button"></button>
-        </div>
-      </div>
-
-      <div class="modal" id="delete-card-modal">
-        <div class="modal__container">
-          <h2 class="modal__title">Are you sure?</h2>
-          <button type="submit" class="modal__button">Yes</button>
-
-          <button class="modal__close-button-container"><img src="<%=require('./images/add-icon.svg')%>" alt="close-button" class = "modal__close-button"></button>
-        </div>
-      </div>
-
-      <div class="modal" id="profile-modal">
+      <div class="modal modal_display_none" id="profile-modal">
         <div class="modal__container">
           <h2 class="modal__title">Edit profile</h2>
 
@@ -100,7 +73,7 @@
         </div>
       </div>
 
-      <div class="modal" id="card-modal">
+      <div class="modal modal_display_none" id="card-modal">
         <div class="modal__image-container">
           <img src="#" alt="" class="modal__image">
           <p class="modal__caption"></p>
