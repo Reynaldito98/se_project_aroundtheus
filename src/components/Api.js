@@ -1,7 +1,7 @@
 import Section from './Section.js';
 import {createNewCard} from '../utils/utils.js';
 import {cardContainerClass} from '../utils/constants.js';
-import { userInfo } from '../pages/index.js';
+import { userInfo, formValidatorCardModal } from '../pages/index.js';
 
 export default class Api{
     constructor(){
@@ -66,7 +66,7 @@ export default class Api{
       })
     }
 
-    editProfile(inputValues){
+    editProfile(inputValues, popup){
       return fetch(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
         headers: this._headers,
@@ -86,11 +86,11 @@ export default class Api{
         console.error(err);
       })
       .finally(() => {
-        this.renderLoading(false);
+        this.renderLoading(false, popup);
       })
     }
 
-    addNewCard(inputValues){
+    addNewCard(inputValues, popup){
       return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
         headers: this._headers,
@@ -114,14 +114,14 @@ export default class Api{
       })
       .catch(err => console.error(err))
       .finally(() => {
-        this.renderLoading(false);
+        this.renderLoading(false, popup);
       })
     }
 
     deleteCard(cardId){
       return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
-        headers: this._headers1
+        headers: this._headers
       })
       .then(res => {
         if(res.ok){
@@ -179,7 +179,7 @@ export default class Api{
       })
     }
 
-    updateProfilePicture(inputValues){
+    updateProfilePicture(inputValues, popup){
       return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: this._headers,
@@ -198,15 +198,15 @@ export default class Api{
       })
       .catch(err => console.error(err))
       .finally(() => {
-        this.renderLoading(false);
+        this.renderLoading(false, popup);
       })
     }
 
-    renderLoading(isLoading){
+    renderLoading(isLoading, popup){
         if(isLoading){
-            document.querySelector('.modal__button').textContent = 'Saving...';
+            popup.querySelector('.modal__button').textContent = 'Saving...';
         } else{
-            document.querySelector('.modal__button').textContent = 'Save';
+            popup.querySelector('.modal__button').textContent = 'Save';
         }   
     }
   }

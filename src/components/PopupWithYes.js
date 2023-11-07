@@ -10,10 +10,17 @@ export default class PopupWithYes extends Popup{
     setEventListeners(){
         super.setEventListeners();
 
-        this._popupButton.addEventListener('click', (evt) => {
+        this._popupElement.querySelector('.modal__close-button-container').addEventListener('click', () => {
+            this._popupButton.removeEventListener('click', deleteCard);
+        });
+
+        const deleteCard = (evt) => {
             evt.preventDefault();
             this._handleYesButton();
             this.close();
-        })
+            this._popupButton.removeEventListener('click', deleteCard);
+        }
+
+        this._popupButton.addEventListener('click', deleteCard);
     }
 }

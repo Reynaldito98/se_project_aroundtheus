@@ -12,15 +12,17 @@
       this._cardElement.querySelector('.card__link').addEventListener('click', () => {
         this._handleLikeButton();
       });
+      
       this._cardElement.querySelector('.card__delete-btn').addEventListener('click', () => {
         const deleteCardPopup = createPopupWithYes('#delete-card-modal', () => {
           api.deleteCard(this._data._id);
           this._handleDeleteCard();
         });
-
+  
         deleteCardPopup.open();
         deleteCardPopup.setEventListeners();
       });
+      
       this._cardElement.querySelector('.card__image').addEventListener('click', () => {
         this._handleImageClick(this._data);
       });

@@ -1,30 +1,3 @@
-const initialCards = [
-    {
-      name: 'Yosemite Valley',
-      link: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg',
-    },
-    {
-      name: 'Lake Louise',
-      link: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg',
-    },
-    {
-      name: 'Bald Mountains',
-      link: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg',
-    },
-    {
-      name: 'Latemar',
-      link: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg',
-    },
-    {
-      name: 'Vanoise National Park',
-      link: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg',
-    },
-    {
-      name: 'Lago di Braies',
-      link: 'https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg',
-    }
-];
-
 //  BUTTONS
 const editButton = document.querySelector('.profile__edit-link');
 const profileNameClass = '.profile__name';
@@ -58,4 +31,4 @@ const validationConfig = {
   errorClass: "modal__input_border_red"
 };
 
-export {initialCards, editButton, profileNameClass, profileDescriptionClass, addPlaceButton, cardModalForm, avatarModalForm, profileModalForm, cardTemplate, cardContainerClass, validationConfig, avatarButton};
+export {editButton, profileNameClass, profileDescriptionClass, addPlaceButton, cardModalForm, avatarModalForm, profileModalForm, cardTemplate, cardContainerClass, validationConfig, avatarButton, profileModal, cardModal, avatarModal};
