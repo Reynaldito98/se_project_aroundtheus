@@ -88,4 +88,4 @@ const addNewCardCallback = (values) => {
   formValidatorCardModal.disableStateButton();
 }
 
-export {makePopUpVisible, makeAddPlacePopUpVisible, createNewUserInfo, createFormValidator, createPopupWithForm, createPopupWithImage, createNewCard, makeAvatarPopUpVisible, loadCardsCallback, loadUserInfoCallback, editProfileCallback, addNewCardCallback};
+export {makePopUpVisible, makeAddPlacePopUpVisible, createNewUserInfo, createFormValidator, createPopupWithForm, createPopupWithImage, createNewCard, makeAvatarPopUpVisible, loadCardsCallback, loadUserInfoCallback, editProfileCallback, addNewCardCallback, createPopupWithConfirmation};

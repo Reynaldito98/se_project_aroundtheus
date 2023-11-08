@@ -1,18 +1,13 @@
 export default class Api{
-    constructor(loadUserInfoCallback, loadCardsCallback, editProfileCallback, addNewCardCallback){
-      this._baseUrl = 'https://around-api.en.tripleten-services.com/v1';
-      this._headers = {
-        authorization: "4c45d989-e1aa-4bb6-a467-6ac9c46f3dac",
-        "Content-Type": "application/json"
-      }
+    constructor(options, loadUserInfoCallback, loadCardsCallback, editProfileCallback, addNewCardCallback){
+      this._baseUrl = options.baseUrl;
+      this._headers = options.headers;
       this._loadUserInfoCallback = loadUserInfoCallback;
       this._loadCardsCallback = loadCardsCallback;
       this._editProfileCallback = editProfileCallback;
       this._addNewCardCallback = addNewCardCallback;
     }
 
-    //I TRIED TO DO THIS AND DIDN'T WORK
-    /*
     _checkResponse(res){
       if(res.ok){
           return res.json();
@@ -20,19 +15,12 @@ export default class Api{
           return Promise.reject(`Error: ${res.status}`);
         }
     }
-    */
 
     loadUserInfo(){
       return fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers
       })
-      .then((res) => {
-        if(res.ok){
-          return res.json();
-        } else{
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
       .then(data => {
         this._loadUserInfoCallback(data);
       })
@@ -42,13 +30,7 @@ export default class Api{
       return fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
       })
-      .then(res => {
-        if(res.ok){
-          return res.json();
-        } else{
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
       .then(data => {
         this._loadCardsCallback(data);
       })
@@ -60,13 +42,7 @@ export default class Api{
         headers: this._headers,
         body: JSON.stringify(inputValues)
       })
-      .then(res => {
-        if(res.ok){
-          return res.json();
-        } else{
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
       .then(values => {
         this._editProfileCallback(values);
         popupForm.close();
@@ -82,13 +58,7 @@ export default class Api{
         headers: this._headers,
         body: JSON.stringify(inputValues)
       })
-      .then(res => {
-        if(res.ok){
-          return res.json();
-        } else{
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
       .then(values => {
         this._addNewCardCallback(values);
         popupForm.close();
@@ -103,13 +73,7 @@ export default class Api{
         method: 'DELETE',
         headers: this._headers
       })
-      .then(res => {
-        if(res.ok){
-          return res.json();
-        } else{
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
       .then(() => {
         cardElement.remove();
       })
@@ -120,13 +84,7 @@ export default class Api{
         method: 'PUT',
         headers: this._headers
       })
-      .then(res => {
-        if(res.ok){
-          return res.json();
-        } else{
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
       .then(res => {
         if(res.isLiked){
           cardElement.querySelector('.card__love-icon').classList.add('card__love-icon_background_black');
@@ -140,13 +98,7 @@ export default class Api{
         method: 'DELETE',
         headers: this._headers
       })
-      .then(res => {
-        if(res.ok){
-          return res.json();
-        } else{
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
       .then(res => {
         if(!res.isLiked){
           cardElement.querySelector('.card__love-icon').classList.remove('card__love-icon_background_black');
@@ -161,13 +113,7 @@ export default class Api{
         headers: this._headers,
         body: JSON.stringify(inputValues)
       })
-      .then(res => {
-        if(res.ok){
-          return res.json();
-        } else{
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      .then(this._checkResponse)
       .then(values => {
         document.querySelector('.profile__image').src = values.avatar;
         popupForm.close();

@@ -2,11 +2,19 @@
 //IMPORTS
 import './index.css';
 import {editButton, profileNameClass, profileDescriptionClass, addPlaceButton, avatarButton, avatarClass, profileModal, profileModalForm, cardModal, cardModalForm, avatarModal, avatarModalForm} from '../utils/constants.js';
-import {makePopUpVisible, makeAddPlacePopUpVisible, createNewUserInfo, createPopupWithImage, makeAvatarPopUpVisible, loadCardsCallback, loadUserInfoCallback, editProfileCallback, addNewCardCallback, createFormValidator, createPopupWithForm} from '../utils/utils.js';
+import {makePopUpVisible, makeAddPlacePopUpVisible, createNewUserInfo, createPopupWithImage, makeAvatarPopUpVisible, loadCardsCallback, loadUserInfoCallback, editProfileCallback, addNewCardCallback, createFormValidator, createPopupWithForm, createPopupWithConfirmation} from '../utils/utils.js';
 import Api from '../components/Api.js'
 
 
-const api = new Api(loadUserInfoCallback, loadCardsCallback, editProfileCallback, addNewCardCallback);
+const options = {
+  baseUrl: 'https://around-api.en.tripleten-services.com/v1',
+  headers: {
+    authorization: "4c45d989-e1aa-4bb6-a467-6ac9c46f3dac",
+    "Content-Type": "application/json"
+  }
+}
+
+const api = new Api(options, loadUserInfoCallback, loadCardsCallback, editProfileCallback, addNewCardCallback);
 api.loadUserInfo();
 api.loadCards();
 
@@ -17,6 +25,7 @@ const userInfo = createNewUserInfo(profileNameClass, profileDescriptionClass, av
 const formValidatorProfileModal = createFormValidator(profileModalForm);
 const formValidatorCardModal = createFormValidator(cardModalForm);
 const formValidatorAvatarModal = createFormValidator(avatarModalForm);
+
 
 
 const addPlacePopup = createPopupWithForm('#add-card-modal', (inputValues) => {
