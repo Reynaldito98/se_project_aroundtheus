@@ -28,10 +28,10 @@ export default class Popup{
     setEventListeners(){
         this._popupElement.querySelector('.modal__close-button-container').addEventListener('click', () => {
             this.close();
-        });
+         });
 
         this._popupElement.addEventListener("mousedown", (evt) => {
             this._handleRemoteClick(evt);
-        })
+        });
     }
 }

@@ -1,11 +1,7 @@
 export default class Api{
-    constructor(options, loadUserInfoCallback, loadCardsCallback, editProfileCallback, addNewCardCallback){
+    constructor(options){
       this._baseUrl = options.baseUrl;
       this._headers = options.headers;
-      this._loadUserInfoCallback = loadUserInfoCallback;
-      this._loadCardsCallback = loadCardsCallback;
-      this._editProfileCallback = editProfileCallback;
-      this._addNewCardCallback = addNewCardCallback;
     }
 
     _checkResponse(res){
@@ -21,9 +17,6 @@ export default class Api{
         headers: this._headers
       })
       .then(this._checkResponse)
-      .then(data => {
-        this._loadUserInfoCallback(data);
-      })
     }
 
     loadCards(){
@@ -31,103 +24,56 @@ export default class Api{
         headers: this._headers
       })
       .then(this._checkResponse)
-      .then(data => {
-        this._loadCardsCallback(data);
-      })
     }
 
-    editProfile(inputValues, popup, popupForm){
+    editProfile(inputValues){
       return fetch(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify(inputValues)
       })
       .then(this._checkResponse)
-      .then(values => {
-        this._editProfileCallback(values);
-        popupForm.close();
-      })
-      .finally(() => {
-        this.renderLoading(false, popup);
-      })
     }
 
-    addNewCard(inputValues, popup, popupForm){
+    addNewCard(inputValues){
       return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify(inputValues)
       })
       .then(this._checkResponse)
-      .then(values => {
-        this._addNewCardCallback(values);
-        popupForm.close();
-      })
-      .finally(() => {
-        this.renderLoading(false, popup);
-      })
     }
 
-    deleteCard(cardId, cardElement){
+    deleteCard(cardId){
       return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
         headers: this._headers
       })
-      .then(this._checkResponse)
-      .then(() => {
-        cardElement.remove();
-      })
+      .then(this._checkResponse) 
     }
 
-    addLike(cardId, cardElement, data){
+    addLike(cardId){
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
         headers: this._headers
       })
       .then(this._checkResponse)
-      .then(res => {
-        if(res.isLiked){
-          cardElement.querySelector('.card__love-icon').classList.add('card__love-icon_background_black');
-          data.isLiked = true;
-        }
-      })
     }
 
-    deleteLike(cardId, cardElement, data){
+    deleteLike(cardId){
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: this._headers
       })
       .then(this._checkResponse)
-      .then(res => {
-        if(!res.isLiked){
-          cardElement.querySelector('.card__love-icon').classList.remove('card__love-icon_background_black');
-          data.isLiked = false;
-        }
-      })
     }
 
-    updateProfilePicture(inputValues, popup, popupForm){
+    updateProfilePicture(inputValues){
       return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify(inputValues)
       })
       .then(this._checkResponse)
-      .then(values => {
-        document.querySelector('.profile__image').src = values.avatar;
-        popupForm.close();
-      })
-      .finally(() => {
-        this.renderLoading(false, popup);
-      })
-    }
-
-    renderLoading(isLoading, popup){
-        if(isLoading){
-            popup.querySelector('.modal__button').textContent = 'Saving...';
-        } else{
-            popup.querySelector('.modal__button').textContent = 'Save';
-        }   
     }
   }
