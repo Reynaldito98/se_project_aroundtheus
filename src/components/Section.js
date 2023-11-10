@@ -18,4 +18,9 @@ export default class Section{
     prependItem(newItem){
         this._container.prepend(newItem);
     }
+
+    setItemsAndRenderer(data, newRenderer){
+        this._initialArray = data;
+        this._renderer = newRenderer;
+    }
 }
