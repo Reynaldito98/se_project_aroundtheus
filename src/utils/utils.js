@@ -46,7 +46,7 @@ function createPopupWithImage(popupSelector){
 }
   
 function createNewCard(item){
-    return new Card(item, cardTemplate, viewPlaceImage, deleteCardCallback, likeButtonCallback).returnCardElement();
+    return new Card(item, cardTemplate, viewPlaceImage, deleteCardCallback, likeButtonCallback);
 }
 
 export {makePopUpVisible, makeAddPlacePopUpVisible, createNewUserInfo, createFormValidator, createPopupWithForm, createPopupWithImage, createNewCard, makeAvatarPopUpVisible, createPopupWithConfirmation};

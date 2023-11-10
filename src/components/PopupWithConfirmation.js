@@ -7,20 +7,16 @@ export default class PopupWithConfirmation extends Popup{
         this._popupButton = this._popupElement.querySelector('.modal__button');
     }
 
+    open(deleteCard){
+        super.open();
+        this._handleYesButton = deleteCard;
+    }
+
     setEventListeners(){
-        const deleteCard = (evt) => {
+        super.setEventListeners();
+        this._popupButton.addEventListener('click', (evt) => {
             evt.preventDefault();
             this._handleYesButton();
-            this._popupButton.removeEventListener('click', deleteCard);
-        }
-
-        const closePopup = () => {
-            this.close();
-            this._popupElement.querySelector('.modal__close-button-container').removeEventListener('click', closePopup);
-        }
-
-        this._popupElement.querySelector('.modal__close-button-container').addEventListener('click', closePopup);
-
-        this._popupButton.addEventListener('click', deleteCard);
+        })
     }
 }

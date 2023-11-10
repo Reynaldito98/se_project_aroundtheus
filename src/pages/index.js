@@ -14,6 +14,9 @@ const userInfo = createNewUserInfo(profileNameClass, profileDescriptionClass, av
 const formValidatorProfileModal = createFormValidator(profileModalForm);
 const formValidatorCardModal = createFormValidator(cardModalForm);
 const formValidatorAvatarModal = createFormValidator(avatarModalForm);
+//DECLARING SECTION VARIABLE
+const renderCards = new Section({items: '', renderer: () => {
+}}, cardContainerClass);
 
 
 
@@ -43,17 +46,12 @@ const loadUserInfoCallback = (data) => {
 
 
 const loadCardsCallback = (data) => {
-  const renderCards = new Section({items: data, renderer: (cardItem) => {
+  renderCards.setItemsAndRenderer(data, (cardItem) => {
     const cardElement = createNewCard(cardItem);
-
-    if(cardItem.isLiked){
-      cardElement.querySelector('.card__love-icon').classList.add('card__love-icon_background_black');
-    } else{
-      cardElement.querySelector('.card__love-icon').classList.remove('card__love-icon_background_black');
-    }
-
-    renderCards.appendItem(cardElement);
-  }}, cardContainerClass);
+    
+    cardElement.likeButtonPersistenceUponReload();
+    renderCards.appendItem(cardElement.returnCardElement());
+  });
 
   renderCards.renderItems();
 }
@@ -68,13 +66,13 @@ const addNewCardCallback = (values) => {
   const titleValue = values.name;
   const urlValue = values.link;
 
-  const cardElement = createNewCard({name: titleValue, link: urlValue, _id: values._id});
-  document.querySelector('.elements').prepend(cardElement);
+  const cardElement = createNewCard({name: titleValue, link: urlValue, _id: values._id}).returnCardElement();
+  renderCards.prependItem(cardElement);
   formValidatorCardModal.disableStateButton();
 }
 
 
-//API CALLS
+//API CALLS AND POPUP CREATIONS
 const api = new Api(options);
 
 Promise.all([api.loadUserInfo(), api.loadCards()])
@@ -116,8 +114,9 @@ const avatarPopup = createPopupWithForm('#avatar-modal', (inputValues) => {
   renderLoading(true, avatarModal);
   api.updateProfilePicture(inputValues)
     .then(values => {
-      document.querySelector('.profile__image').src = values.avatar;
+      userInfo.renderAvatar(values);
       avatarPopup.close();
+      formValidatorAvatarModal.disableStateButton();
     })
     .catch(err => console.log(err))
     .finally(() => {
@@ -125,40 +124,42 @@ const avatarPopup = createPopupWithForm('#avatar-modal', (inputValues) => {
     })
 })
 
+const deleteCardPopup = createPopupWithConfirmation('#delete-card-modal', () => {
 
-const deleteCardCallback = (data, cardElement) => {
-  const deleteCardPopup = createPopupWithConfirmation('#delete-card-modal', () => {
-    api.deleteCard(data._id)
-    .then(() => {
-      deleteCardPopup.close();
-      cardElement.remove();
+}); 
+
+
+const deleteCardCallback = (cardInstance) => {
+  const deleteCardMethod = () => {
+    api.deleteCard(cardInstance.getId())
+      .then(() => {
+        deleteCardPopup.close();
+        cardInstance.deleteCard();
     })
     .catch(err => console.log(err))
-  });
+  }
 
-  deleteCardPopup.setEventListeners();
-  deleteCardPopup.open();
+
+  deleteCardPopup.open(deleteCardMethod)
 }
 
-const likeButtonCallback = (data, cardElement) => {
-  if(!data.isLiked){
-      api.addLike(data._id)
+const likeButtonCallback = (cardInstance) => {
+  if(!cardInstance.getIsLiked()){
+      api.addLike(cardInstance.getId())
         .then(res => {
           if(res.isLiked){
-            cardElement.querySelector('.card__love-icon').classList.add('card__love-icon_background_black');
-            data.isLiked = true;
+            cardInstance.addLike();
           }
         })
         .catch(err => console.log(err))
     } else{
-      api.deleteLike(data._id)
+      api.deleteLike(cardInstance.getId())
         .then(res => {
           if(!res.isLiked){
-            cardElement.querySelector('.card__love-icon').classList.remove('card__love-icon_background_black');
-            data.isLiked = false;
+            cardInstance.deleteLike();
           }
-        })
-        .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
    }
 } 
 
@@ -170,6 +171,7 @@ formValidatorAvatarModal.enableValidation();
 avatarPopup.setEventListeners();
 addPlacePopup.setEventListeners();
 userInfoPopup.setEventListeners();
+deleteCardPopup.setEventListeners();
 imagePopup.setEventListeners();
 editButton.addEventListener('click', makePopUpVisible);
 addPlaceButton.addEventListener('click', makeAddPlacePopUpVisible);

@@ -13,7 +13,7 @@
       });
       
       this._cardElement.querySelector('.card__delete-btn').addEventListener('click', () => {
-        this._deleteCardCallback(this._data, this._cardElement);
+        this._deleteCardCallback(this);
       });
       
       this._cardElement.querySelector('.card__image').addEventListener('click', () => {
@@ -22,7 +22,37 @@
     }
   
     _handleLikeButton(){
-      this._likeButtonCallback(this._data, this._cardElement);
+      this._likeButtonCallback(this);
+    }
+
+    deleteCard(){
+      this._cardElement.remove();
+    }
+
+    getId(){
+      return this._data._id;
+    }
+
+    getIsLiked(){
+      return this._data.isLiked;
+    }
+
+    addLike(){
+      this._cardElement.querySelector('.card__love-icon').classList.add('card__love-icon_background_black');
+      this._data.isLiked = true;
+    }
+
+    deleteLike(){
+      this._cardElement.querySelector('.card__love-icon').classList.remove('card__love-icon_background_black');
+      this._data.isLiked = false;
+    }
+    
+    likeButtonPersistenceUponReload(){
+      if(this._data.isLiked){
+        this._cardElement.querySelector('.card__love-icon').classList.add('card__love-icon_background_black');
+      } else{
+        this._cardElement.querySelector('.card__love-icon').classList.remove('card__love-icon_background_black');
+      }  
     }
   
     returnCardElement(){

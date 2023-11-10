@@ -20,4 +20,8 @@ export default class UserInfo{
         this._userJob.textContent = inputValues.about;
         this._avatar.src = inputValues.avatar;
     }
+
+    renderAvatar(values){
+        this._avatar.src = values.avatar;
+    }
 }
