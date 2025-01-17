@@ -26,8 +26,8 @@ const renderCards = new Section({items: '', renderer: () => {
 const options = {
   baseUrl: 'https://around-api.en.tripleten-services.com/v1',
   headers: {
-    authorization: "4c45d989-e1aa-4bb6-a467-6ac9c46f3dac",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    authorization: '20315743-2e79-4356-b56c-474d72a93e6c'
   }
 }
 
